@@ -1,0 +1,136 @@
+---
+# defaults file for ansible-role-bacula
+bacula_dir_host: "bacula-dir"
+bacula_dir_name: "bacula-dir"
+bacula_mon_name: "bacula-mon"
+
+# will be overriden later (see register-facts.yml):
+bacula_fd_fqdn: "{{ ansible_fqdn }}"
+# bacula_fd_name: "bacula-fd"
+bacula_fd_name: "{{ bacula_fd_fqdn }}-fd"
+bacula_fd_job_name: "{{ bacula_fd_fqdn }}-Backup"
+bacula_fd_jobdefs_name: "{{ bacula_fd_fqdn }}-Jobdef"
+
+bacula_sd_host: "bacula-sd"
+bacula_sd_name: "bacula-sd"
+
+bacula_dir_restore_path: "/srv/bacula-restores"
+
+# you may override the values to a real@domain.tld address
+bacula_dir_email_admin: root
+bacula_dir_email_operator: root
+
+# decide what component is needed.
+# fd is default, override via host_vars
+bacula_fd_role: True
+bacula_dir_role: False
+bacula_sd_role: False
+bacula_bconsole_role: False
+
+# passwords will be generated when empty
+bacula_console_password: ""
+bacula_dir_password: ""
+bacula_mon_password: ""
+bacula_sd_password: ""
+bacula_fd_password: ""
+# keep FDpassword when not defined in vars:
+bacula_fd_auto_psk: True
+
+# Default DB engine (can be 'pgsql' or 'mysql')
+bacula_dir_db_engine: mysql
+bacula_dir_dbname: "bacula"
+bacula_dir_dbaddress: "localhost"
+# standard ports - mysql: 3306, psql: 5432
+bacula_dir_dbport: "3306"
+bacula_dir_dbuser: "bacula"
+bacula_dir_dbpassword: ""
+# Create DB (+import Tables), create user + grant?
+bacula_database_enable_changes: True
+
+bacula_catalog: "BaculaCatalog"
+# uid/group/mode of files we template out:
+bacula_console_user: root
+bacula_console_group: bacula
+bacula_console_filemode: '0640'
+bacula_fd_user: root
+bacula_fd_group: bacula
+bacula_fd_filemode: '0600'
+bacula_dir_user: bacula
+bacula_dir_group: root
+bacula_dir_filemode: '0640'
+bacula_sd_user: bacula
+bacula_sd_group: root
+bacula_sd_filemode: '0640'
+bacula_dir_messages: "Standard"
+bacula_sd_messages: "Standard"
+bacula_fd_max_jobs: 5
+bacula_dir_max_jobs: 10
+bacula_sd_max_jobs: 15
+bacula_sd_device_max_jobs: "{{ bacula_sd_max_jobs }}"
+
+# define which storage device-template we use:
+bacula_sd_device_template: "storage_device_include_ringbuffer.j2"
+
+# define port defaults in case they got overriden later:
+bacula_dir_port_default: 9101
+bacula_fd_port_default: 9102
+bacula_sd_port_default: 9103
+bacula_dir_port: "{{ bacula_dir_port_default }}"
+bacula_fd_port: "{{ bacula_fd_port_default }}"
+bacula_sd_port: "{{ bacula_sd_port_default }}"
+
+# must be the same:
+bacula_dir_storage_name: "{{ bacula_sd_device_name }}"
+
+# Storage Definitions
+bacula_sd_device_name: "RingBuffer"
+bacula_sd_media_type: "File"
+# where to storge the volumes:
+bacula_sd_archive_device: "/srv/bacula"
+bacula_dir_pool_name: "Files"
+bacula_dir_pool_label_format: "Bacula-Vol-"
+bacula_dir_pool_recycle: "yes"
+# Default: 60 days
+bacula_dir_pool_file_retention: "180 days"
+# Default: 6 months
+bacula_dir_pool_job_retention: "24 months"
+# Prune expired Jobs/Files:
+bacula_dir_pool_autoprune: "yes"
+bacula_dir_pool_volume_rention: "3650 days"
+bacula_dir_pool_max_volume_bytes: "10G"
+bacula_dir_pool_max_volumes: 100
+
+# timeout-settings (both defaulting to 30min):
+bacula_dir_fd_connect_time: "5 minutes"
+bacula_dir_sd_connect_time: "30 minutes"
+
+bacula_dir_allow_duplicate_jobs: "no"
+bacula_dir_cancel_running_duplicates: "yes"
+
+# FD Fileset definitions:
+# Default fileset:
+bacula_fd_fileSet_name: "Standard"
+# overrides:
+#bacula_fd_fileSet_includes: |+
+#    File = "/etc"
+#    File = "/home"
+#    File = "/root"
+#    File = "/var/log"
+#bacula_fd_fileSet_excludes: |+
+#    File = "/proc"
+
+# protect existing filesets?
+bacula_fd_fileSet_overwrite: False
+bacula_fd_fileSet_signature: "SHA1"
+bacula_fd_fileSet_compression: "GZIP"
+bacula_fd_fileSet_verify: "pins1"
+# stay on current filesystems (regardless of submounts?) yes (bacula-default) -> stay
+bacula_fd_fileSet_onefs: "yes"
+bacula_fd_level: "Incremental"
+bacula_fd_messages: "Standard"
+# pool (on dir) our fd takes:
+bacula_fd_pool: "{{ bacula_dir_pool_name }}"
+bacula_fd_priority: 10
+bacula_fd_schedule: "WeeklyCycle"
+bacula_fd_storage: "{{ bacula_dir_storage_name }}"
+bacula_fd_type: "Backup"

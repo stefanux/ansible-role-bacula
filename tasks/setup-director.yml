@@ -1,0 +1,170 @@
+# Install and configure Bacula-dir
+---
+- name: Setup DIR | Install bacula-dir packages (mysql)
+  package: name="{{ bacula_dir_packages_mysql }}" state=present
+  when: bacula_dir_db_engine == "mysql"
+  tags:
+  - packages
+
+- name: Setup DIR | Install bacula-dir packages (pgsql)
+  package: name="{{ bacula_dir_packages_pgsql }}" state=present
+  when: bacula_dir_db_engine == "pgsql"
+  tags:
+  - packages
+
+- name: Setup DIR | Create DB if not exists (mysql)
+  mysql_db:
+    name: "{{ bacula_dir_dbname }}"
+    state: present
+  register: bacula_database_mysql_exists
+  when:
+  - bacula_dir_db_engine == "mysql"
+  - bacula_database_enable_changes
+  tags:
+  - db
+
+- name: Setup DIR | Create DB if not exists (pgsql)
+  postgresql_db:
+    name: "{{ bacula_dir_dbname }}"
+    state: present
+  register: bacula_database_pgsql_exists
+  when:
+  - bacula_dir_db_engine == "pgsql"
+  - bacula_database_enable_changes
+  tags:
+  - db
+
+- name: Setup DIR | Create Tables in DB (mysql)
+  mysql_db:
+    name: "{{ bacula_dir_dbname }}"
+    state: import
+    target: "{{ bacula_dir_dbimport_mysql_file }}"
+  when:
+  - bacula_dir_db_engine == "mysql"
+  - bacula_database_enable_changes
+  - bacula_database_mysql_exists.changed
+  tags:
+  - db
+
+- name: Setup DIR | Create Tables in DB (pgsql)
+  postgresql_db:
+    name: "{{ bacula_dir_dbname }}"
+    state: import
+    target: "{{ bacula_dir_dbimport_pgsql_file }}"
+  when:
+  - bacula_dir_db_engine == "pgsql"
+  - bacula_database_enable_changes
+  - bacula_database_pgsql_exists.changed
+  tags:
+  - db
+
+- name: Setup DIR | Create User and grant usage (mysql)
+  # needs python-mysqldb or python3-mysqldb
+  mysql_user:
+    name: "{{ bacula_dir_dbuser }}"
+    # host: "%"
+    host: "{{ bacula_dir_dbaddress }}"
+    password: "{{ bacula_dir_dbpassword }}"
+    priv: "{{ bacula_dir_dbname }}.*:ALL"
+    state: "present"
+  no_log: True
+  when:
+  - bacula_dir_db_engine == "mysql"
+  - bacula_database_enable_changes
+  tags:
+  - db
+
+- name: Setup DIR | Create User and grant usage (pgsql)
+  # needs python-psycopg2 / python3-psycopg2
+  postgresql_user:
+    db: "{{ bacula_dir_dbname }}"
+    name: "{{ bacula_dir_dbuser }}"
+    # host: "%"
+    host: "{{ bacula_dir_dbaddress }}"
+    password: "{{ bacula_dir_dbpassword }}"
+    priv: "CONNECT/ALL"
+    state: "present"
+    expires: infinity
+  no_log: True
+  when:
+  - bacula_dir_db_engine == "pgsql"
+  - bacula_database_enable_changes
+  tags:
+  - db
+
+- name: Setup DIR | Create include-dir on director
+  file:
+    dest: "{{ bacula_dir_include_config_dir }}"
+    owner: "{{ bacula_dir_user }}"
+    group: "{{ bacula_dir_group }}"
+    state: directory
+    mode: 0750
+  tags:
+  - templates
+
+- name: Setup DIR | Create stub configuration in include-dir
+  template:
+    src: "{{ role_path }}/templates/00-include-dir.conf.j2"
+    dest: "{{ bacula_dir_include_config_dir }}/00-include-dir.conf"
+    owner: "{{ bacula_dir_user }}"
+    group: "{{ bacula_dir_group }}"
+    mode: "{{ bacula_dir_filemode }}"
+  tags:
+  - templates
+
+- name: Setup DIR | Setup FD on director
+  include_tasks: "setup-fd-on-director.yml"
+
+- name: Setup DIR | Manage configuration of bacula-dir (fileset)
+  template:
+    src: "{{ role_path }}/templates/bacula-dir-fileset-default.conf.j2"
+    dest: "{{ bacula_dir_include_config_dir }}/01-bacula-dir-fileset-default.conf"
+    owner: "{{ bacula_dir_user }}"
+    group: "{{ bacula_dir_group }}"
+    mode: "{{ bacula_dir_filemode }}"
+  notify: 'Reload bacula-dir'
+  tags:
+  - templates
+
+- name: Setup DIR | Manage configuration of bacula-dir (schedules)
+  template:
+    src: "{{ role_path }}/templates/bacula-dir-schedules.j2"
+    dest: "{{ bacula_dir_include_config_dir }}/02-bacula-dir-schedules.conf"
+    owner: "{{ bacula_dir_user }}"
+    group: "{{ bacula_dir_group }}"
+    mode: "{{ bacula_dir_filemode }}"
+  notify: 'Reload bacula-dir'
+  tags:
+  - templates
+
+- name: Manage configuration of bacula-dir (jobs)
+  template:
+    src: "{{ role_path }}/templates/bacula-dir-backupjobs.conf.j2"
+    dest: "{{ bacula_dir_include_config_dir }}/03-bacula-dir-backupjobs.conf"
+    owner: "{{ bacula_dir_user }}"
+    group: "{{ bacula_dir_group }}"
+    mode: "{{ bacula_dir_filemode }}"
+    # validate: "{{ bacula_dir_binary }} -t -c %s"
+  notify: 'Reload bacula-dir'
+  tags:
+  - templates
+
+- name: Setup DIR | Manage configuration of bacula-dir (main config)
+  template:
+    src: "{{ role_path }}/templates/bacula-dir.conf.j2"
+    dest: "{{ bacula_dir_config }}"
+    owner: "{{ bacula_dir_user }}"
+    group: "{{ bacula_dir_group }}"
+    mode: "{{ bacula_dir_filemode }}"
+    # validate: "{{ bacula_dir_binary }} -t -c %s"
+  notify: 'Restart bacula-dir'
+  tags:
+  - templates
+
+- name: Setup DIR | Manage bacula-dir service
+  service:
+    name: "{{ bacula_dir_service_name }}"
+    state: started
+    enabled: yes
+  tags:
+  - packages

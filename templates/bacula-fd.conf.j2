@@ -1,0 +1,30 @@
+# bacula-config for {{ bacula_dir_name }}
+# {{ ansible_managed }}
+
+# List Directors who are permitted to contact this File daemon:
+Director {
+  Name = {{ bacula_dir_name }}
+  Password = "{{ bacula_fd_password }}"
+}
+
+Director {
+  Name = {{ bacula_mon_name }}
+  Password = "{{ bacula_mon_password }}"
+  # monitoring only:
+  Monitor = yes
+}
+
+# backup agent (=file-daemon):
+FileDaemon {
+  Name = {{ bacula_fd_name }}
+  FDAddress = {{ bacula_fd_fqdn }}
+  FDport = {{ bacula_fd_port }}
+  WorkingDirectory = {{ bacula_workingDirectory }}
+  Pid Directory = {{ bacula_pidDirectory }}
+  Maximum Concurrent Jobs = {{ bacula_fd_max_jobs }}
+}
+
+Messages {
+  Name = {{ bacula_dir_messages }}
+  director = {{ bacula_dir_name }} = all, !skipped, !restored
+}

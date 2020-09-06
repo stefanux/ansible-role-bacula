@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+
+FileSet {
+  Name = "{{ bacula_fd_fileSet_name }}"
+  Include {
+    Options {
+      signature = {{ bacula_fd_fileSet_signature }}
+      compression = {{ bacula_fd_fileSet_compression }}
+      verify = {{ bacula_fd_fileSet_verify }}
+      onefs = {{ bacula_fd_fileSet_onefs }}
+    }
+
+    {{ bacula_fd_fileSet_includes }}
+
+  {% if bacula_fd_fileSet_excludes is defined %}
+  }
+  Exclude {
+
+   {{ bacula_fd_fileSet_excludes }}
+
+  }
+  {% endif %}
+}

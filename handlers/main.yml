@@ -1,0 +1,36 @@
+---
+- name: "Check bacula-Dir Config"
+  shell: "{{ bacula_dir_binary }} -t -c {{ bacula_dir_config }}"
+  register: bacula_dir_config_check
+  ignore_errors: yes
+  delegate_to: "{{ bacula_dir_fqdn }}"
+
+- name: "Restart bacula-dir"
+  service:
+    name: "{{ bacula_dir_service_name }}"
+    state: restarted
+  delegate_to: "{{ bacula_dir_fqdn }}"
+  run_once: true
+
+- name: "Reload bacula-dir"
+  service:
+    name: "{{ bacula_dir_service_name }}"
+    state: reloaded
+  run_once: true
+  delegate_to: "{{ bacula_dir_fqdn }}"
+  run_once: true
+
+- name: "Restart bacula-sd"
+  service:
+    name: "{{ bacula_sd_service_name }}"
+    state: restarted
+
+- name: "Restart bacula-fd"
+  service:
+    name: "{{ bacula_fd_service_name }}"
+    state: restarted
+
+- name: "Restart bacula-fd (Windows)"
+  win_service:
+    name: "{{ bacula_fd_service_name }}"
+    state: restarted
