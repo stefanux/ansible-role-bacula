@@ -8,15 +8,17 @@ FileSet {
       compression = {{ bacula_fd_fileSet_compression }}
       verify = {{ bacula_fd_fileSet_verify }}
       onefs = {{ bacula_fd_fileSet_onefs }}
+    # hallo
     }
 
-    {{ bacula_fd_fileSet_includes }}
+{{ bacula_fd_fileSet_includes }}
+
+  }
 
   {% if bacula_fd_fileSet_excludes is defined %}
-  }
   Exclude {
 
-   {{ bacula_fd_fileSet_excludes }}
+{{ bacula_fd_fileSet_excludes }}
 
   }
   {% endif %}
