@@ -24,6 +24,7 @@
   service:
     name: "{{ bacula_sd_service_name }}"
     state: restarted
+  when: bacula_sd_role
 
 - name: "Restart bacula-fd"
   service:
