@@ -85,7 +85,7 @@ Pool {
   Pool Type = Backup
   Recycle = {{ bacula_dir_pool_recycle }}                      # Bacula can automatically recycle Volumes
   AutoPrune = {{ bacula_dir_pool_autoprune }}                     # Prune expired volumes
-  Volume Retention = {{ bacula_dir_pool_volume_rention }}         # one year
+  Volume Retention = {{ bacula_dir_pool_volume_rention }}         # default: one year
   Maximum Volume Bytes = {{ bacula_dir_pool_max_volume_bytes }}          # Limit Volume size to something reasonable
   Maximum Volumes = {{ bacula_dir_pool_max_volumes }}               # Limit number of Volumes in Pool
   Label Format = "{{ bacula_dir_pool_label_format }}"               # Auto label
