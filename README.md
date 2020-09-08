@@ -5,7 +5,7 @@ This Role can install any component of the backup system "bacula".
 Component  Variable tag
 bacula-director (dir) bacula_dir_role bacula-dir
 bacula-storage daemon (sd) bacula_sd_role bacula-sd
-bacula-console  bacula_bconsole_role  bacula-console
+bacula-console  bacula_console_role  bacula-console
 bacula-file daemon (fd) bacula_fd_role bacula-fd
 
 ## Requirements

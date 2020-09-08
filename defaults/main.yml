@@ -25,7 +25,7 @@ bacula_dir_email_operator: root
 bacula_fd_role: True
 bacula_dir_role: False
 bacula_sd_role: False
-bacula_bconsole_role: False
+bacula_console_role: False
 
 # passwords will be generated when empty
 bacula_console_password: ""

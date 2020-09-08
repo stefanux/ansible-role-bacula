@@ -21,7 +21,7 @@
 
 - name: Setup Console
   include_tasks: "setup-console.yml"
-  when: bacula_bconsole_role|bool
+  when: bacula_console_role|bool
   tags:
     - bacula-console
 
