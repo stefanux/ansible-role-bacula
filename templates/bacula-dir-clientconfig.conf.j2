@@ -10,6 +10,10 @@ Client {
   File Retention = {{ bacula_dir_pool_file_retention }}
   Job Retention = {{ bacula_dir_pool_job_retention }}
   AutoPrune = {{ bacula_dir_pool_autoprune }}  # Prune expired Jobs/Files
+  {% if bacula_fd_extra_client_options is defined and bacula_fd_extra_client_options|length > 0 %}
+  {{ bacula_fd_extra_client_options }}
+  {% endif %}
+
 }
 
 JobDefs {
@@ -22,6 +26,10 @@ JobDefs {
   Storage = {{ bacula_fd_storage }}
   Messages = {{ bacula_fd_messages }}
   Pool = {{ bacula_fd_pool }}
+  {% if bacula_fd_extra_jobdefs_options is defined and bacula_fd_extra_jobdefs_options|length > 0 %}
+  {{ bacula_fd_extra_jobdefs_options }}
+  {% endif %}
+
 }
 
 Job {
@@ -51,6 +59,10 @@ Job {
   {% endif %}
   {% if bacula_fd_run_after_failed_job is defined and bacula_fd_run_after_failed_job|length > 0 %}
   Run After Failed Job = "{{ bacula_fd_run_after_failed_job }}"
+  {% endif %}
+
+  {% if bacula_fd_extra_job_options is defined and bacula_fd_extra_job_options|length > 0 %}
+  {{ bacula_fd_extra_job_options }}
   {% endif %}
 
 }
