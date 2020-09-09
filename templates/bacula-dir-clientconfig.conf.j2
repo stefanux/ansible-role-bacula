@@ -32,4 +32,25 @@ Job {
 
   Allow Duplicate Jobs = {{ bacula_dir_allow_duplicate_jobs }}
   Cancel Running Duplicates = {{ bacula_dir_cancel_running_duplicates }}
+
+  # Before/after Jobs (if defined):
+  {% if bacula_fd_client_run_before_job is defined and bacula_fd_client_run_before_job|length > 0 %}
+  Client Run Before Job = "{{ bacula_fd_client_run_before_job }}"
+  {% endif %}
+  {% if bacula_fd_client_run_after_job is defined and bacula_fd_client_run_after_job|length > 0 %}
+  Client Run After Job = "{{ bacula_fd_client_run_after_job }}"
+  {% endif %}
+  {% if bacula_fd_run_before_job is defined and bacula_fd_run_before_job|length > 0 %}
+  Client Run Before Job = "{{ bacula_fd_run_before_job }}"
+  {% endif %}
+  {% if bacula_fd_run_before_job is defined and bacula_fd_run_before_job|length > 0 %}
+  Run Before Job = "{{ bacula_fd_run_before_job }}"
+  {% endif %}
+  {% if bacula_fd_run_after_job is defined and bacula_fd_run_after_job|length > 0 %}
+  Run After Job = "{{ bacula_fd_run_after_job }}"
+  {% endif %}
+  {% if bacula_fd_run_after_failed_job is defined and bacula_fd_run_after_failed_job|length > 0 %}
+  Run After Failed Job = "{{ bacula_fd_run_after_failed_job }}"
+  {% endif %}
+
 }
