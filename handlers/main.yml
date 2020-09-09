@@ -18,7 +18,6 @@
     state: reloaded
   run_once: true
   delegate_to: "{{ bacula_dir_fqdn }}"
-  run_once: true
 
 - name: "Restart bacula-sd"
   service:

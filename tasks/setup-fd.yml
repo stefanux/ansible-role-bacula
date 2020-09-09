@@ -43,7 +43,7 @@
     owner: "{{ bacula_dir_user }}"
     group: "{{ bacula_dir_group }}"
     mode: "{{ bacula_dir_filemode }}"
-  notify: 'Restart bacula-dir'
+  notify: 'Reload bacula-dir'
   delegate_to: "{{ bacula_dir_fqdn }}"
   when:
   - bacula_fd_fileSet_includes is defined
@@ -80,7 +80,7 @@
     owner: "{{ bacula_dir_user }}"
     group: "{{ bacula_dir_group }}"
     mode: "{{ bacula_dir_filemode }}"
-  notify: 'Restart bacula-dir'
+  notify: 'Reload bacula-dir'
   delegate_to: "{{ bacula_dir_fqdn }}"
 
 - name: Setup FD | Manage bacula-fd service
