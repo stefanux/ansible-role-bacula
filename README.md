@@ -42,11 +42,14 @@ bacula_dir_db_engine: mysql
 ### vaulted passwords
 my recommendation: set the following variables in your vault:
 
+```yaml
 bacula_console_password: ""
 bacula_dir_password: ""
 bacula_dir_dbpassword: ""
 bacula_mon_password: ""
 bacula_sd_password: ""
+```
+
 
 why?
 empty passwords are substituted with random values - on very run.
@@ -85,6 +88,7 @@ bacula_dir_pool_max_volumes: 100
 Example: host_vars/host1.domain.tld.yml
 
 **own fileset**:
+```yaml
 bacula_fd_fileSet_name: "fileset-of-host1"
 bacula_fd_fileSet_includes: |+
 File = "/files/only/on/host1"
@@ -93,11 +97,14 @@ File = "/root"
 bacula_fd_fileSet_excludes: |+
 File = "/files/EXCLUDED/on/host1"
 File = "/proc"
+```
 
 **additional options in job-ressource**:
+```yaml
 bacula_fd_extra_job_options: |+
 Option1 = Example1
 Option2 = Example2
+```
 
 same goes **for client and jobdef**-ressources:
 
