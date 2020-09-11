@@ -120,7 +120,7 @@ bacula_fd_fileSet_name: "Standard"
 #    File = "/proc"
 
 # protect existing filesets?
-bacula_fd_fileSet_overwrite: False
+bacula_fd_fileSet_overwrite: True
 bacula_fd_fileSet_signature: "SHA1"
 bacula_fd_fileSet_compression: "GZIP"
 bacula_fd_fileSet_verify: "pins1"
