@@ -1,12 +1,14 @@
 # Install and configure databases
+# needs python-mysqldb or python3-mysqldb
+#  - name: Install MySQL-Python  module
+#    pip: name=MySQL-python
 ---
 - name: Setup mysql | Create DB if not exists (mysql)
-  # needs python-mysqldb or python3-mysqldb
   mysql_db:
     name: "{{ bacula_dir_dbname }}"
     state: present
     login_port: "{{ bacula_dir_dbport }}"
-    login_host: "{{ bacula_dir_dbaddress | default('default_value') }}"
+    login_host: "{{ bacula_dir_dbaddress }}"
     login_password: "{{ bacula_dir_db_adminpass }}"
     login_user: "{{ bacula_dir_db_adminuser }}"
   register: bacula_database_mysql_exists
@@ -22,7 +24,7 @@
     name: "{{ bacula_dir_dbname }}"
     state: present
     login_port: "{{ bacula_dir_dbport }}"
-    login_host: "{{ bacula_dir_dbaddress | default('default_value') }}"
+    login_host: "{{ bacula_dir_dbaddress }}"
   register: bacula_database_mysql_exists
   when:
   - bacula_dir_db_engine == "mysql"
@@ -57,7 +59,6 @@
   - bacula_dir_db_engine == "mysql"
   - bacula_database_mysql_exists.changed
   - bacula_dir_db_adminuser|length == 0
-#  - bacula_dir_db_adminpass|length == 0
   tags:
   - db
 
