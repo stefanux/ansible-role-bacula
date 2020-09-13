@@ -1,18 +1,16 @@
 ---
 # defaults file for ansible-role-bacula
-bacula_dir_host: "bacula-dir"
-bacula_dir_name: "bacula-dir"
-bacula_mon_name: "bacula-mon"
 
 # will be overriden later (see register-facts.yml):
 bacula_fd_fqdn: "{{ ansible_fqdn }}"
-# bacula_fd_name: "bacula-fd"
+bacula_sd_fqdn: "{{ ansible_fqdn }}"
+
+bacula_dir_name: "bacula-dir"
+bacula_mon_name: "bacula-mon"
+bacula_sd_name: "bacula-sd"
 bacula_fd_name: "{{ bacula_fd_fqdn }}-fd"
 bacula_fd_job_name: "{{ bacula_fd_fqdn }}-Backup"
 bacula_fd_jobdefs_name: "{{ bacula_fd_fqdn }}-Jobdef"
-
-bacula_sd_host: "bacula-sd"
-bacula_sd_name: "bacula-sd"
 
 bacula_dir_restore_path: "/srv/bacula-restores"
 
@@ -36,19 +34,25 @@ bacula_fd_password: ""
 # keep FDpassword when not defined in vars:
 bacula_fd_auto_psk: True
 
-# Default DB engine (can be 'pgsql' or 'mysql')
+# Default DB engine (can be 'pgsql' or 'mysql'):
 bacula_dir_db_engine: mysql
 bacula_dir_dbname: "bacula"
 bacula_dir_dbaddress: "localhost"
 # login for DB creation only (optional, ansible is falling back to "config_file" "~/.my.cnf"):
 bacula_dir_db_adminuser: ""
 bacula_dir_db_adminpass: ""
+
 # standard ports - mysql: 3306, psql: 5432
 bacula_dir_dbport: "3306"
 bacula_dir_dbuser: "bacula"
 bacula_dir_dbpassword: ""
 # do nothing DB-Related (Create DB, user, grant, import tables):
 bacula_ignore_database: False
+
+# maintenance_db might have another name (i.e. on digitalocean its "defaultdb"):
+bacula_dir_pgsql_maintenance_db_name: "postgres"
+# if not set, ansible might complain about different encodings (bacula needs SQL_ASCII, not UTF8)
+bacula_dir_pgsql_template_db_name: template0
 
 bacula_catalog: "BaculaCatalog"
 # uid/group/mode of files we template out:
