@@ -14,6 +14,20 @@
   - db
   - packages
 
+- name: Setup Database (mysql)
+  include_tasks: "setup-mysql.yml"
+  when:
+  - bacula_dir_role|bool
+  - bacula_dir_db_engine == "mysql"
+  - not bacula_ignore_database
+
+- name: Setup Database (pgsql)
+  include_tasks: "setup-pgsql.yml"
+  when:
+  - bacula_dir_role|bool
+  - bacula_dir_db_engine == "pgsql"
+  - not bacula_ignore_database
+
 - name: Setup DIR | Create include-dir on director
   file:
     dest: "{{ bacula_dir_include_config_dir }}"
