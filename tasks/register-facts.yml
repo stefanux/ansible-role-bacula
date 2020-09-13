@@ -65,7 +65,7 @@
   when:
   - bacula_fd_auto_psk
   - bacula_fd_auto_psk_file_present is defined
-  - bacula_fd_auto_psk_file_present.stat.exists 
+  - bacula_fd_auto_psk_file_present.stat.exists
   tags:
     - bacula-fd
 
