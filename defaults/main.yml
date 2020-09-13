@@ -40,6 +40,7 @@ bacula_fd_auto_psk: True
 bacula_dir_db_engine: mysql
 bacula_dir_dbname: "bacula"
 bacula_dir_dbaddress: "localhost"
+# login for DB creation only (optional, ansible is falling back to "config_file" "~/.my.cnf"):
 bacula_dir_db_adminuser: ""
 bacula_dir_db_adminpass: ""
 # standard ports - mysql: 3306, psql: 5432
