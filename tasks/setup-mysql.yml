@@ -7,7 +7,6 @@
   register: bacula_database_mysql_exists
   when:
   - bacula_dir_db_engine == "mysql"
-  - bacula_database_enable_changes
   tags:
   - db
 
@@ -18,7 +17,6 @@
     target: "{{ bacula_dir_dbimport_mysql_file }}"
   when:
   - bacula_dir_db_engine == "mysql"
-  - bacula_database_enable_changes
   - bacula_database_mysql_exists.changed
   tags:
   - db
@@ -35,6 +33,5 @@
   no_log: True
   when:
   - bacula_dir_db_engine == "mysql"
-  - bacula_database_enable_changes
   tags:
   - db

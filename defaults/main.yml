@@ -40,12 +40,14 @@ bacula_fd_auto_psk: True
 bacula_dir_db_engine: mysql
 bacula_dir_dbname: "bacula"
 bacula_dir_dbaddress: "localhost"
+bacula_dir_db_adminuser: ""
+bacula_dir_db_adminpass: ""
 # standard ports - mysql: 3306, psql: 5432
 bacula_dir_dbport: "3306"
 bacula_dir_dbuser: "bacula"
 bacula_dir_dbpassword: ""
-# Create DB (+import Tables), create user + grant?
-bacula_database_enable_changes: True
+# do nothing DB-Related (Create DB, user, grant, import tables):
+bacula_ignore_database: False
 
 bacula_catalog: "BaculaCatalog"
 # uid/group/mode of files we template out:

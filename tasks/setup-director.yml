@@ -4,12 +4,14 @@
   package: name="{{ bacula_dir_packages_mysql }}" state=present
   when: bacula_dir_db_engine == "mysql"
   tags:
+  - db
   - packages
 
 - name: Setup DIR | Install bacula-dir packages (pgsql)
   package: name="{{ bacula_dir_packages_pgsql }}" state=present
   when: bacula_dir_db_engine == "pgsql"
   tags:
+  - db
   - packages
 
 - name: Setup DIR | Create include-dir on director

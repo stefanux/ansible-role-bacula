@@ -7,7 +7,6 @@
   register: bacula_database_pgsql_exists
   when:
   - bacula_dir_db_engine == "pgsql"
-  - bacula_database_enable_changes
   tags:
   - db
 
@@ -18,7 +17,6 @@
     target: "{{ bacula_dir_dbimport_pgsql_file }}"
   when:
   - bacula_dir_db_engine == "pgsql"
-  - bacula_database_enable_changes
   - bacula_database_pgsql_exists.changed
   tags:
   - db
@@ -37,6 +35,6 @@
   no_log: True
   when:
   - bacula_dir_db_engine == "pgsql"
-  - bacula_database_enable_changes
   tags:
   - db
+

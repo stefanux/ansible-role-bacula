@@ -18,12 +18,14 @@
   when:
   - bacula_dir_role|bool
   - bacula_dir_db_engine == "mysql"
+  - not bacula_ignore_database
 
 - name: Setup Database (pgsql)
   include_tasks: "setup-pgsql.yml"
   when:
   - bacula_dir_role|bool
   - bacula_dir_db_engine == "pgsql"
+  - not bacula_ignore_database
 
 - name: Setup DIR
   include_tasks: "setup-director.yml"
