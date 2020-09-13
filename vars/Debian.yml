@@ -19,7 +19,8 @@ bacula_sd_binary: "/usr/sbin/bacula-sd"
 bacula_sd_service_name: "bacula-sd"
 bacula_dir_queryfile: /etc/bacula/scripts/query.sql
 bacula_dir_dbimport_mysql_file: "/usr/share/dbconfig-common/data/bacula-director-mysql/install/mysql"
-bacula_dir_dbimport_pgsql_file: "/usr/share/dbconfig-common/data/bacula-director-pgsql/install-dbadmin/pgsql"
+bacula_dir_dbimport_pgsql_file: "/usr/share/dbconfig-common/data/bacula-director-pgsql/install/pgsql"
+bacula_dir_dbimport_pgsql_dbsettings: "/usr/share/dbconfig-common/data/bacula-director-pgsql/install-dbadmin/pgsql"
 
 bacula_dir_packages_mysql:
 - bacula-bscan
