@@ -22,6 +22,11 @@ Director {                            # define myself
 
   FD Connect Timeout = {{ bacula_dir_fd_connect_time }}
   SD Connect Timeout = {{ bacula_dir_sd_connect_time }}
+
+  {% if bacula_dir_extra_director_options is defined and bacula_dir_extra_director_options|length > 0 %}
+  {{ bacula_dir_extra_director_options }}
+  {% endif %}
+
 }
 
 Storage {

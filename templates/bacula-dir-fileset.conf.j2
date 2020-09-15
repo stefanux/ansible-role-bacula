@@ -2,6 +2,13 @@
 
 FileSet {
   Name = "{{ bacula_fd_fileSet_name }}"
+  {% if bacula_fd_fileSet_ignore_changes is defined and bacula_fd_fileSet_ignore_changes %}
+  Ignore FileSet Changes = yes
+  {% endif %}
+  {% if bacula_fd_extra_fileset_options is defined and bacula_fd_extra_fileset_options|length > 0 %}
+  {{ bacula_fd_extra_fileset_options }}
+  {% endif %}
+
   Include {
     Options {
       signature = {{ bacula_fd_fileSet_signature }}

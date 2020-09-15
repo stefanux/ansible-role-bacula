@@ -14,6 +14,10 @@ Director {
   Monitor = yes
 }
 
+{% if bacula_fd_extra_directors_allowed is defined and bacula_fd_extra_directors_allowed|length > 0 %}
+{{ bacula_fd_extra_directors_allowed }}
+{% endif %}
+
 # backup agent (=file-daemon):
 FileDaemon {
   Name = {{ bacula_fd_name }}
@@ -28,3 +32,7 @@ Messages {
   Name = {{ bacula_dir_messages }}
   director = {{ bacula_dir_name }} = all, !skipped, !restored
 }
+
+{% if bacula_fd_extra_messages is defined and bacula_fd_extra_messages|length > 0 %}
+{{ bacula_fd_extra_messages }}
+{% endif %}
