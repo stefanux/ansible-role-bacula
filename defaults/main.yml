@@ -49,6 +49,8 @@ bacula_dir_dbuser: "bacula"
 bacula_dir_dbpassword: ""
 # do nothing DB-Related (Create DB, user, grant, import tables):
 bacula_ignore_database: False
+# activate no_log for sensitive data (turn off for debugging)
+bacula_debug_no_log: True
 
 # destroy database if present (all data is lost!)
 bacula_dir_db_destroy: False

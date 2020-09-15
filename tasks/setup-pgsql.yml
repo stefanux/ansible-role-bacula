@@ -124,7 +124,7 @@
   become_user: postgres
   vars:
     ansible_ssh_pipelining: true
-#  no_log: True
+  no_log: "{{ bacula_debug_no_log }}"
   when:
   - bacula_dir_db_engine == "pgsql"
   - bacula_dir_db_adminuser|length == 0
@@ -142,7 +142,7 @@
     password: "{{ bacula_dir_dbpassword }}"
     state: "present"
     expires: infinity
-#  no_log: True
+  no_log: "{{ bacula_debug_no_log }}"
   when:
   - bacula_dir_db_engine == "pgsql"
   - bacula_dir_db_adminuser|length > 0

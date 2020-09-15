@@ -74,7 +74,7 @@
     login_host: "{{ bacula_dir_dbaddress }}"
     login_password: "{{ bacula_dir_db_adminpass }}"
     login_user: "{{ bacula_dir_db_adminuser }}"
-  no_log: True
+  no_log: "{{ bacula_debug_no_log }}"
   when:
   - bacula_dir_db_engine == "mysql"
   - bacula_dir_db_adminuser|length > 0
@@ -91,7 +91,7 @@
     state: "present"
     login_port: "{{ bacula_dir_dbport }}"
     login_host: "{{ bacula_dir_dbaddress }}"
-  no_log: True
+  no_log: "{{ bacula_debug_no_log }}"
   when:
   - bacula_dir_db_engine == "mysql"
   - bacula_dir_db_adminuser|length == 0
