@@ -43,16 +43,21 @@ bacula_dir_db_adminuser: ""
 bacula_dir_db_adminpass: ""
 
 # standard ports - mysql: 3306, psql: 5432
-bacula_dir_dbport: "3306"
+bacula_dir_dbport: "{{ '3306' if bacula_dir_db_engine == 'mysql' else '5432' }}"
+
 bacula_dir_dbuser: "bacula"
 bacula_dir_dbpassword: ""
 # do nothing DB-Related (Create DB, user, grant, import tables):
 bacula_ignore_database: False
 
+# destroy database if present (all data is lost!)
+bacula_dir_db_destroy: False
+
 # maintenance_db might have another name (i.e. on digitalocean its "defaultdb"):
 bacula_dir_pgsql_maintenance_db_name: "postgres"
 # if not set, ansible might complain about different encodings (bacula needs SQL_ASCII, not UTF8)
-bacula_dir_pgsql_template_db_name: template0
+# bacula_dir_pgsql_template_db_name: "template0"
+bacula_dir_pgsql_db_name_unix_socket: "postgresql_unix_socket_directories[0]"
 
 bacula_catalog: "BaculaCatalog"
 # uid/group/mode of files we template out:
@@ -113,6 +118,38 @@ bacula_dir_sd_connect_time: "30 minutes"
 
 bacula_dir_allow_duplicate_jobs: "no"
 bacula_dir_cancel_running_duplicates: "yes"
+# when changing fileset (includes, excludes) bacula promotes level to Full
+# this settings avoids that behavior, not recommended but saves space when extending the fileset:
+bacula_fd_fileSet_ignore_changes: False
+
+# Extend Options in resssources:
+# bacula_fd_extra_fileset_options: |+
+#    Option1 = Value1
+# bacula_fd_extra_jobdefs_options: |+
+#    Option1 = Value1
+# bacula_fd_extra_jobs_options: |+
+#    Option1 = Value1
+# bacula_fd_extra_client_options |+
+#    Option1 = Value1
+# bacula_dir_extra_director_options: |+
+#    Option1 = Value1
+# bacula_dir_schedules_extra_template: ""
+
+# ADD more director/monitors (define variable bacula_extra_mon_password for this example):
+# bacula_fd_extra_directors_allowed: |+
+#Director {
+#  Name = ExtraMonitor
+#  Password = "{{ bacula_extra_mon_password }}"
+#  Monitor = yes
+#}
+
+# define extra message ressource for this dir/mon too:
+#bacula_fd_extra_messages: |+
+#Messages {
+#  Name = 2ndDir
+#  director = bacula_dir_no2 = all, !skipped, !restored
+#}
+
 
 # FD Fileset definitions:
 # Default fileset:
@@ -141,3 +178,4 @@ bacula_fd_priority: 10
 bacula_fd_schedule: "WeeklyCycle"
 bacula_fd_storage: "{{ bacula_dir_storage_name }}"
 bacula_fd_type: "Backup"
+
