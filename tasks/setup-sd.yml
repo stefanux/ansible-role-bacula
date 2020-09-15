@@ -5,7 +5,7 @@
   tags:
   - packages
 
-- name: Setup SD |Manage configuration of bacula-sd file
+- name: Setup SD | Manage configuration of bacula-sd file
   template:
     src: "{{ role_path }}/templates/bacula-sd.conf.j2"
     dest: "{{ bacula_sd_config }}"
