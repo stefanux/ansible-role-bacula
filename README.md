@@ -20,15 +20,9 @@ see the notes on firewalling: https://www.bacula.org/9.6.x-manuals/en/problems/D
 
 Currently only tested on mysql / mariadb and Ubuntu/Debian in LTS-Versions.
 
-## Variables
+## Quick start
 
-### defaults
-
-defaults are set here:
-- defaults/main.yml
-- vars/{{ ansible_os_family }}.yml
-
-### important values which needs customization
+### customize (at least) this vars:
 (see example playbooks).
 
 bacula_dir_fqdn: "fqdn.of.director.domain.tld"
@@ -38,6 +32,26 @@ bacula_dir_restore_path: "/srv/bacula-restores" (Default restore path)
 
 -> DB engine (can be 'pgsql' or 'mysql')
 bacula_dir_db_engine: mysql
+
+### Define the director/SD via (host_vars / group_vars):
+
+host_vars/bacula-dir1.stefanux.net.yml
+
+```yaml
+---
+bacula_console_role: True
+bacula_dir_role: True
+bacula_sd_role: True
+bacula_fd_role: True
+```
+
+## Variables
+
+### defaults
+
+defaults are set here:
+- defaults/main.yml
+- vars/{{ ansible_os_family }}.yml
 
 ### vaulted passwords
 my recommendation: set the following variables in your vault:
