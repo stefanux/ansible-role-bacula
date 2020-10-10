@@ -90,6 +90,9 @@ Pool {
   Pool Type = Backup
   Recycle = {{ bacula_dir_pool_recycle }}                      # Bacula can automatically recycle Volumes
   AutoPrune = {{ bacula_dir_pool_autoprune }}                     # Prune expired volumes
+  {% if bacula_dir_pool_purge_oldest_volume is defined and bacula_dir_pool_purge_oldest_volume|length > 0 %}
+  Purge Oldest Volume = {{ bacula_dir_pool_purge_oldest_volume }}           # force the use of the oldest volume (regardless of retention times!) when empty volume is needed
+  {% endif %}
   Volume Retention = {{ bacula_dir_pool_volume_rention }}         # default: one year
   Maximum Volume Bytes = {{ bacula_dir_pool_max_volume_bytes }}          # Limit Volume size to something reasonable
   Maximum Volumes = {{ bacula_dir_pool_max_volumes }}               # Limit number of Volumes in Pool

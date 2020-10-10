@@ -104,6 +104,9 @@ bacula_sd_archive_device: "/srv/bacula"
 bacula_dir_pool_name: "Files"
 bacula_dir_pool_label_format: "Bacula-Vol-"
 bacula_dir_pool_recycle: "yes"
+# bacula will purge the oldest volume (regardless of rentention times),
+# useful for ringbuffer setups (no manual interventions!):
+bacula_dir_pool_purge_oldest_volume: "yes"
 # Default: 60 days
 bacula_dir_pool_file_retention: "180 days"
 # Default: 6 months
