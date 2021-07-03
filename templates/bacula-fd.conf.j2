@@ -21,7 +21,7 @@ Director {
 # backup agent (=file-daemon):
 FileDaemon {
   Name = {{ bacula_fd_name }}
-  FDAddress = {{ bacula_fd_fqdn }}
+  FDAddress = {{ bacula_fd_connect_address|default(bacula_fd_fqdn) }}
   FDport = {{ bacula_fd_port }}
   WorkingDirectory = {{ bacula_workingDirectory }}
   Pid Directory = {{ bacula_pidDirectory }}

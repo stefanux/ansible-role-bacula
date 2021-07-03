@@ -3,7 +3,7 @@
 
 Client {
   Name = {{ bacula_fd_name }}
-  Address = {{ bacula_fd_fqdn }}
+  Address = {{ bacula_fd_connect_address|default(bacula_fd_fqdn) }}
   FDPort = {{ bacula_fd_port }}
   Catalog = {{ bacula_catalog }}
   Password = "{{ bacula_fd_password }}"    # password for FileDaemon

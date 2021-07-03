@@ -125,6 +125,10 @@ same goes **for client and jobdef**-ressources:
 bacula_fd_extra_client_options
 bacula_fd_extra_jobdefs_options
 
+**different FQDN for connected**:
+```yaml
+bacula_fd_connect_address: "different.fqdn.to.connect.to"
+```
 
 ### Change Schedules:
 
