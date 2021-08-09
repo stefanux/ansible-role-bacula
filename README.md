@@ -28,7 +28,8 @@ Currently only tested on mysql / mariadb and Ubuntu/Debian in LTS-Versions.
 bacula_dir_fqdn: "fqdn.of.director.domain.tld"
 bacula_sd_fqdn: "fqdn.of.sd.domain.tld"
 
-bacula_dir_restore_path: "/srv/bacula-restores" (Default restore path)
+bacula_dir_restore_path: "/var/bacula-restores" (Default restore path)
+bacula_sd_archive_device: "/var/bacula-volumes" (Default volume path)
 
 -> DB engine (can be 'pgsql' or 'mysql')
 bacula_dir_db_engine: mysql

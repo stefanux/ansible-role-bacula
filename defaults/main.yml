@@ -12,7 +12,7 @@ bacula_fd_name: "{{ bacula_fd_fqdn }}-fd"
 bacula_fd_job_name: "{{ bacula_fd_fqdn }}-Backup"
 bacula_fd_jobdefs_name: "{{ bacula_fd_fqdn }}-Jobdef"
 
-bacula_dir_restore_path: "/srv/bacula-restores"
+bacula_dir_restore_path: "/var/bacula-restores"
 
 # you may override the values to a real@domain.tld address
 bacula_dir_email_admin: root
@@ -100,7 +100,7 @@ bacula_dir_storage_name: "{{ bacula_sd_device_name }}"
 bacula_sd_device_name: "RingBuffer"
 bacula_sd_media_type: "File"
 # where to storge the volumes:
-bacula_sd_archive_device: "/srv/bacula"
+bacula_sd_archive_device: "/var/bacula-volumes"
 bacula_dir_pool_name: "Files"
 bacula_dir_pool_label_format: "Bacula-Vol-"
 bacula_dir_pool_recycle: "yes"
