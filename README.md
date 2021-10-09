@@ -134,5 +134,7 @@ bacula_fd_connect_address: "different.fqdn.to.connect.to"
 ### Change Schedules:
 
 - see "bacula-dir-fileset-default.conf.j2" for a example.
-- define your own template with additional Schedule: "bacula_dir_schedules_extra_emplate"
-and reference them in "bacula_fd_schedule"
+- create your own config snippet (jinja2 template) with additional Schedules (i.e.: $ansibleroot/templates/bacula_dir_schedules_extra.j2)
+- define the variable "bacula_dir_schedules_extra_template" with the filename of your template ("bacula_dir_schedules_extra.j2"), so it is included by the standard template bacula-dir-schedules.j2 :
+  example: add in "group_vars/bacula_dir.yml" this line: bacula_dir_schedules_extra_template: "bacula_dir_schedules_extra.j2
+
