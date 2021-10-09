@@ -1,8 +1,8 @@
 ---
 galaxy_info:
-  role_name: bacula-director
+  role_name: bacula
   author: stefanux
-  description: Manage bacula-director
+  description: Manage bacula
 
   license: license MIT
 
