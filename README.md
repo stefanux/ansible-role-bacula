@@ -131,10 +131,17 @@ bacula_fd_extra_jobdefs_options
 bacula_fd_connect_address: "different.fqdn.to.connect.to"
 ```
 
-### Change Schedules:
+specific schedule for a host:
+- set a (valid!) name for var bacula_fd_schedule (i.e. in host_vars/$hostname.yml with content "bacula_fd_schedule: MoreFrequentSchedule").
+
+
+### Extend global schedules:
 
 - see "bacula-dir-fileset-default.conf.j2" for a example.
 - create your own config snippet (jinja2 template) with additional Schedules (i.e.: $ansibleroot/templates/bacula_dir_schedules_extra.j2)
-- define the variable "bacula_dir_schedules_extra_template" with the filename of your template ("bacula_dir_schedules_extra.j2"), so it is included by the standard template bacula-dir-schedules.j2 :
-  example: add in "group_vars/bacula_dir.yml" this line: bacula_dir_schedules_extra_template: "bacula_dir_schedules_extra.j2
+- define the variable "bacula_dir_schedule_extra_template" with the filename of your template ("bacula_dir_schedule_extra.j2"), so it is included by the standard template bacula-dir-schedules.j2 :
+  example: add in "group_vars/bacula_dir.yml" this line: bacula_dir_schedule_extra_template: "bacula_dir_schedules_extra.j2
 
+### Extend global filesets:
+
+same as schedules but the var is "bacula_dir_fileset_extra"
