@@ -65,10 +65,8 @@ bacula_mon_password: ""
 bacula_sd_password: ""
 ```
 
-
-why?
-empty passwords are substituted with random values - on very run.
-Except for the fd-passwords which will be preseved when bacula_fd_auto_psk is True (default).
+Attention: empty passwords are substituted with random values - on very run. Useful for testing but not in production.
+Exception are the fd-passwords, they will be preserved when bacula_fd_auto_psk is True (default).
 
 ### customize storage device (tape, Filestorage etc.)
 Example: Ringbuffer 
