@@ -138,6 +138,11 @@ bacula_fd_fileSet_ignore_changes: False
 #    Option1 = Value1
 # bacula_dir_extra_director_options: |+
 #    Option1 = Value1
+
+# define extra systemwide filesets:
+# bacula_dir_fileset_extra_template: ""
+
+# define extra systemwide schedules:
 # bacula_dir_schedules_extra_template: ""
 
 # ADD more director/monitors (define variable bacula_extra_mon_password for this example):
