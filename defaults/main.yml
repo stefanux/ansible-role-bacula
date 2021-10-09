@@ -27,7 +27,6 @@ bacula_console_role: False
 
 # passwords will be generated when empty
 bacula_console_password: ""
-bacula_dir_password: ""
 bacula_mon_password: ""
 bacula_sd_password: ""
 bacula_fd_password: ""

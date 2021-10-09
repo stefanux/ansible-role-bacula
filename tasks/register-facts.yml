@@ -17,14 +17,15 @@
   tags:
     - bacula-dir
 
-- name: Set DIR password
+- name: Set Console password
   set_fact:
-    bacula_dir_password: "{{ lookup('password', '/dev/null length=45 chars=ascii_letters') }}"
+    bacula_console_password: "{{ lookup('password', '/dev/null length=45 chars=ascii_letters') }}"
   no_log: True
   when:
-  - (bacula_dir_password|length == 0) or (bacula_dir_password is not defined)
-  - bacula_dir_role|bool
+  - (bacula_console_password|length == 0) or (bacula_console_password is not defined)
+  - bacula_dir_role|bool or bacula_console_role|bool
   tags:
+    - bacula-console
     - bacula-dir
 
 - name: Set MON password
