@@ -7,6 +7,5 @@
   vars:
     - bacula_dir_fqdn: "fqdn.of.director.domain.tld"
     - bacula_sd_fqdn: "fqdn.of.sd.domain.tld"
-    - bacula_sd_pool_device_name: "Ringbuffer"
   vars_files:
     - my_vault.yml
