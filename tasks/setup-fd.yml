@@ -83,20 +83,20 @@
   notify: 'Reload bacula-dir'
   delegate_to: "{{ bacula_dir_fqdn }}"
 
-- name: Setup FD | Manage bacula-fd service
+- name: Setup FD | Enable bacula-fd service
   service:
     name: "{{ bacula_fd_service_name }}"
-    state: started
     enabled: yes
   when: ansible_os_family != "Windows"
+  notify: 'Start bacula-fd'
   tags:
   - packages
 
-- name: Setup FD | Manage bacula-fd service (Windows)
+- name: Setup FD | Enable bacula-fd service (Windows)
   win_service:
     name: "{{ bacula_fd_service_name }}"
-    state: started
     start_mode: auto
   when: ansible_os_family == "Windows"
+  notify: 'Start bacula-fd (Windows)'
   tags:
   - packages

@@ -5,6 +5,15 @@
   ignore_errors: yes
   delegate_to: "{{ bacula_dir_fqdn }}"
 
+- name: "Start bacula-dir"
+  service:
+    name: "{{ bacula_dir_service_name }}"
+    state: started
+  delegate_to: "{{ bacula_dir_fqdn }}"
+  run_once: true
+  when:
+  - bacula_restart_services
+
 - name: "Restart bacula-dir"
   service:
     name: "{{ bacula_dir_service_name }}"
@@ -23,6 +32,14 @@
   when:
   - bacula_reload_services
 
+- name: "Start bacula-sd"
+  service:
+    name: "{{ bacula_sd_service_name }}"
+    state: started
+  when:
+  - bacula_sd_role
+  - bacula_restart_services
+
 - name: "Restart bacula-sd"
   service:
     name: "{{ bacula_sd_service_name }}"
@@ -31,10 +48,20 @@
   - bacula_sd_role
   - bacula_restart_services
 
+- name: "Start bacula-fd"
+  service:
+    name: "{{ bacula_fd_service_name }}"
+    state: started
+
 - name: "Restart bacula-fd"
   service:
     name: "{{ bacula_fd_service_name }}"
     state: restarted
+
+- name: "Start bacula-fd (Windows)"
+  service:
+    name: "{{ bacula_fd_service_name }}"
+    state: started
 
 - name: "Restart bacula-fd (Windows)"
   win_service:

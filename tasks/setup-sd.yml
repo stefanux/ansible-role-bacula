@@ -24,10 +24,10 @@
     mode: 0750
   when: bacula_sd_media_type == "File"
 
-- name: Setup SD | Manage bacula-sd service
+- name: Setup SD | Enable bacula-sd service
   service:
     name: "{{ bacula_sd_service_name }}"
-    state: started
     enabled: yes
+  notify: 'Start bacula-sd'
   tags:
   - packages

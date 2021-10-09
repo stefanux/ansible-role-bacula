@@ -97,10 +97,10 @@
   tags:
   - templates
 
-- name: Setup DIR | Manage bacula-dir service
+- name: Setup DIR | Enable bacula-dir service
   service:
     name: "{{ bacula_dir_service_name }}"
-    state: started
     enabled: yes
+  notify: 'Start bacula-dir'
   tags:
   - packages
