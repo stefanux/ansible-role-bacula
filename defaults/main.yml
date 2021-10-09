@@ -110,7 +110,7 @@ bacula_dir_pool_purge_oldest_volume: "yes"
 # Default: 60 days
 bacula_dir_pool_file_retention: "60 days"
 # Default: 6 months
-bacula_dir_pool_job_retention: "24 months"
+bacula_dir_pool_job_retention: "6 months"
 # Prune expired Jobs/Files:
 bacula_dir_pool_autoprune: "yes"
 bacula_dir_pool_volume_rention: "3650 days"
