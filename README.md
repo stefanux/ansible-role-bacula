@@ -87,7 +87,7 @@ bacula_dir_pool_name: "Files"
 bacula_dir_pool_label_format: "Bacula-Vol-"
 bacula_dir_pool_recycle: "yes"
 
-bacula_dir_pool_file_retention: "180 days" # Default: 60 days
+bacula_dir_pool_file_retention: "60 days" # Default: 60 days
 
 bacula_dir_pool_job_retention: "24 months" # Default: 6 months
 
