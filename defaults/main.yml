@@ -184,3 +184,6 @@ bacula_fd_schedule: "WeeklyCycle"
 bacula_fd_storage: "{{ bacula_dir_storage_name }}"
 bacula_fd_type: "Backup"
 
+# set to False if handlers should not restart/reload DIR and SD services
+bacula_reload_services: True
+bacula_restart_services: True

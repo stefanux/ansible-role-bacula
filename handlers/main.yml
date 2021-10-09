@@ -11,6 +11,8 @@
     state: restarted
   delegate_to: "{{ bacula_dir_fqdn }}"
   run_once: true
+  when:
+  - bacula_restart_services
 
 - name: "Reload bacula-dir"
   service:
@@ -18,12 +20,16 @@
     state: reloaded
   run_once: true
   delegate_to: "{{ bacula_dir_fqdn }}"
+  when:
+  - bacula_reload_services
 
 - name: "Restart bacula-sd"
   service:
     name: "{{ bacula_sd_service_name }}"
     state: restarted
-  when: bacula_sd_role
+  when:
+  - bacula_sd_role
+  - bacula_restart_services
 
 - name: "Restart bacula-fd"
   service:
