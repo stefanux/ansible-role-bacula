@@ -39,10 +39,12 @@ FileSet {
     # File = /
 
     # All local ext3,4, ... partitions
-    File = "\\|bash -c \"df -klF ext3 | tail +2 | awk '{print \$6}'\""
-    File = "\\|bash -c \"df -klF ext4 | tail +2 | awk '{print \$6}'\""
-    File = "\\|bash -c \"df -klF xfs | tail +2 | awk '{print \$6}'\""
-    File = "\\|bash -c \"df -klF zfs | tail +2 | awk '{print \$6}'\""
+    File = "\\|bash -c \"grep btrfs /proc/mounts | awk '{print \$2}'\""
+    File = "\\|bash -c \"grep ext2 /proc/mounts | awk '{print \$2}'\""
+    File = "\\|bash -c \"grep ext3 /proc/mounts | awk '{print \$2}'\""
+    File = "\\|bash -c \"grep ext4 /proc/mounts | awk '{print \$2}'\""
+    File = "\\|bash -c \"grep xfs /proc/mounts | awk '{print \$2}'\""
+    File = "\\|bash -c \"grep zfs /proc/mounts | awk '{print \$2}'\""
   }
 
   # If you backup the root directory, the following excluded
