@@ -20,52 +20,54 @@ FileSet {
       signature = {{ bacula_fd_fileSet_signature }}
       compression = {{ bacula_fd_fileSet_compression }}
       verify = {{ bacula_fd_fileSet_verify }}
+      # yes: stay on the current filesystem:
       onefs = yes
-      # fstype = ext4
     }
 
-    #  Put your list of files here, preceded by 'File =', one per line
-    #    or include an external list with:
-    #
-    #    File = <file-name
-    #
-    #  Note: / backs up everything on the root partition.
-    #    if you have other partitions such as /usr or /home
-    #    you will probably want to add them too.
-    #
-
-    # when onefs=no, this will exclude submounts
-    # when onefs=yes, this will include network-drives
-    # File = /
-
-    # All local ext3,4, ... partitions
+    # All local mountpoints (ext3, ext4, ...)
     File = "\\|bash -c \"grep btrfs /proc/mounts | awk '{print \$2}'\""
     File = "\\|bash -c \"grep ext2 /proc/mounts | awk '{print \$2}'\""
     File = "\\|bash -c \"grep ext3 /proc/mounts | awk '{print \$2}'\""
     File = "\\|bash -c \"grep ext4 /proc/mounts | awk '{print \$2}'\""
+    File = "\\|bash -c \"grep reiserfs /proc/mounts | awk '{print \$2}'\""
     File = "\\|bash -c \"grep xfs /proc/mounts | awk '{print \$2}'\""
     File = "\\|bash -c \"grep zfs /proc/mounts | awk '{print \$2}'\""
   }
 
   # If you backup the root directory, the following excluded
   # files can be useful
-
-  # Exclude {
-  #   File = /proc
-  #   File = /tmp
-  #   File = /sys
-  #   File = /.journal
-  #   File = /.fsck
-  #}
+  Exclude {
+    File = /dev
+    File = /proc
+    File = /tmp
+    File = /sys
+    File = /.journal
+    File = /.fsck
+  }
 }
 
 FileSet {
   Name = "Standard"
   Include {
     Options {
-      signature = SHA1
-      compression = GZIP
-      verify = pins1
+      signature = {{ bacula_fd_fileSet_signature }}
+      compression = {{ bacula_fd_fileSet_compression }}
+      verify = {{ bacula_fd_fileSet_verify }}
+    }
+    File = "/etc"
+    File = "/home"
+    File = "/root"
+    File = "/var/log"
+  }
+}
+
+FileSet {
+  Name = "StandardPlusSrv"
+  Include {
+    Options {
+      signature = {{ bacula_fd_fileSet_signature }}
+      compression = {{ bacula_fd_fileSet_compression }}
+      verify = {{ bacula_fd_fileSet_verify }}
     }
     File = "/etc"
     File = "/home"
