@@ -36,6 +36,7 @@ Storage {
   Password = "{{ bacula_sd_password }}"
   Device = {{ bacula_sd_device_name }}       # Name of the storage-device in SD-config
   Media Type = {{ bacula_sd_media_type }}
+  Maximum Concurrent Jobs = {{ bacula_sd_device_max_jobs }}
 }
 
 # Generic catalog service
