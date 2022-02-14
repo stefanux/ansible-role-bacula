@@ -1,6 +1,6 @@
 ---
 - name: "Check bacula-Dir Config"
-  shell: "{{ bacula_dir_binary }} -t -c {{ bacula_dir_config }}"
+  command: "{{ bacula_dir_binary }} -t -c {{ bacula_dir_config }}"
   register: bacula_dir_config_check
   ignore_errors: yes
   delegate_to: "{{ bacula_dir_fqdn }}"
