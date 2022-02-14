@@ -101,21 +101,34 @@ Example: host_vars/host1.domain.tld.yml
 
 **own fileset**:
 ```yaml
-bacula_fd_fileSet_name: "fileset-of-host1"
-bacula_fd_fileSet_includes: |+
+bacula_fd_fileset_name: "fileset-of-host1"
+bacula_fd_fileset_includes: |+
 File = "/files/only/on/host1"
 File = "/etc"
 File = "/root"
-bacula_fd_fileSet_excludes: |+
+bacula_fd_fileset_excludes: |+
 File = "/files/EXCLUDED/on/host1"
 File = "/proc"
 ```
+
+**define jobs that the client should run before**
+useful for database-backups (this can be done in a group_var too!):
+
+bacula_fd_client_run_before_job: command 
+bacula_fd_client_run_after_job: command
 
 **additional options in job-ressource**:
 ```yaml
 bacula_fd_extra_job_options: |+
 Option1 = Example1
 Option2 = Example2
+```
+
+Example: add more "Client Run Before Job" via bacula_fd_extra_job_options:
+```yaml
+bacula_fd_extra_job_options: |+
+    Client Run Before Job = "additional before job" 
+    Client Run After Job = "additional after job"
 ```
 
 same goes **for client and jobdef**-ressources:
