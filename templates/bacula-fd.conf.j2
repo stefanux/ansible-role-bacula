@@ -23,6 +23,9 @@ FileDaemon {
   Name = {{ bacula_fd_name }}
   FDAddress = {{ bacula_fd_connect_address|default(bacula_fd_fqdn) }}
   FDport = {{ bacula_fd_port }}
+{% if bacula_fd_source_address is defined and bacula_fd_source_address|length > 0 %}
+  FDSourceAddress = {{ bacula_fd_source_address }}
+{% endif %}
   WorkingDirectory = {{ bacula_workingDirectory }}
   Pid Directory = {{ bacula_pidDirectory }}
   Maximum Concurrent Jobs = {{ bacula_fd_max_jobs }}

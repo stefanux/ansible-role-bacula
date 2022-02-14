@@ -123,9 +123,13 @@ same goes **for client and jobdef**-ressources:
 bacula_fd_extra_client_options
 bacula_fd_extra_jobdefs_options
 
-**different FQDN for connected**:
+**different FQDN for connection to fd**:
 ```yaml
 bacula_fd_connect_address: "different.fqdn.to.connect.to"
+```
+set source IP (default: the kernel will choose the best address according to the routing table):
+```
+bacula_fd_source_address: "IP_or_FQDN"
 ```
 
 specific schedule for a host:
