@@ -14,8 +14,8 @@ Director {                            # define myself
   DirAddress = {{ bacula_dir_fqdn }}            # bind to this address
   DIRport = {{ bacula_dir_port }}               # where we listen for UA connections
   QueryFile = "{{ bacula_dir_queryfile }}"
-  WorkingDirectory = "{{ bacula_workingDirectory }}"
-  PidDirectory = "{{ bacula_pidDirectory }}"
+  WorkingDirectory = "{{ bacula_workingdirectory }}"
+  PidDirectory = "{{ bacula_piddirectory }}"
   Maximum Concurrent Jobs = {{ bacula_dir_max_jobs }}
   Password = "{{ bacula_console_password }}"    # Console password
   Messages = Daemon

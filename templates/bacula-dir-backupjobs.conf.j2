@@ -18,7 +18,7 @@ Job {
   RunBeforeJob = "/etc/bacula/scripts/make_catalog_backup.pl {{ bacula_catalog }}"
   # This deletes the copy of the catalog
   # RunAfterJob  = "/etc/bacula/scripts/delete_catalog_backup"
-  Write Bootstrap = "{{ bacula_workingDirectory }}/%n.bsr"
+  Write Bootstrap = "{{ bacula_workingdirectory }}/%n.bsr"
   Priority = 11                   # run after main backup
 }
 
@@ -54,5 +54,5 @@ JobDefs {
   Pool = {{ bacula_dir_pool_name }}
   SpoolAttributes = yes
   Priority = 10
-  Write Bootstrap = "{{ bacula_workingDirectory }}/%c.bsr"
+  Write Bootstrap = "{{ bacula_workingdirectory }}/%c.bsr"
 }

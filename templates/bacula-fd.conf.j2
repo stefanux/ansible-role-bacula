@@ -26,8 +26,8 @@ FileDaemon {
 {% if bacula_fd_source_address is defined and bacula_fd_source_address|length > 0 %}
   FDSourceAddress = {{ bacula_fd_source_address }}
 {% endif %}
-  WorkingDirectory = {{ bacula_workingDirectory }}
-  Pid Directory = {{ bacula_pidDirectory }}
+  WorkingDirectory = {{ bacula_workingdirectory }}
+  Pid Directory = {{ bacula_piddirectory }}
   Maximum Concurrent Jobs = {{ bacula_fd_max_jobs }}
 }
 

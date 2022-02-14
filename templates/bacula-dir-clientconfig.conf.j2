@@ -21,7 +21,7 @@ JobDefs {
   Type = {{ bacula_fd_type }}
   Level = {{ bacula_fd_level }}
   Client = {{ bacula_fd_name }}
-  FileSet = "{{ bacula_fd_fileSet_name }}"
+  FileSet = "{{ bacula_fd_fileset_name }}"
   Schedule = "{{ bacula_fd_schedule }}"
   Storage = {{ bacula_fd_storage }}
   Messages = {{ bacula_fd_messages }}
@@ -35,7 +35,7 @@ JobDefs {
 Job {
   Name = {{ bacula_fd_job_name }}
   JobDefs = {{ bacula_fd_jobdefs_name }}
-  Write Bootstrap = "{{ bacula_workingDirectory }}/{{ bacula_fd_name }}.bsr"
+  Write Bootstrap = "{{ bacula_workingdirectory }}/{{ bacula_fd_name }}.bsr"
   Priority = {{ bacula_fd_priority }}
 
   Allow Duplicate Jobs = {{ bacula_dir_allow_duplicate_jobs }}
