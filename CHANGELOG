@@ -1,8 +1,9 @@
 # Changelog
 
-## 1.1
 
-linted vars (now just lowercase):
+## 1.2
+
+more linted vars 
 
 old vars: (fileSet -> fileset):
 bacula_fd_fileSet_compression
@@ -17,5 +18,9 @@ bacula_pidDirectory
 bacula_pluginDirectory
 bacula_workingDirectory
 
+
+## 1.1
+
+linted vars (now just lowercase):
 
 ## 1.0 initial release
