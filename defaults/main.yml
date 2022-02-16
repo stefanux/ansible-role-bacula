@@ -124,7 +124,7 @@ bacula_dir_allow_duplicate_jobs: "no"
 bacula_dir_cancel_running_duplicates: "yes"
 # when changing fileset (includes, excludes) bacula promotes level to Full
 # this settings avoids that behavior, not recommended but saves space when extending the fileset:
-bacula_fd_fileSet_ignore_changes: False
+bacula_fd_fileset_ignore_changes: False
 
 # Extend Options in resssources:
 # bacula_fd_extra_fileset_options: |+
@@ -162,23 +162,23 @@ bacula_fd_fileSet_ignore_changes: False
 
 # FD Fileset definitions:
 # Default fileset:
-bacula_fd_fileSet_name: "Standard"
+bacula_fd_fileset_name: "Standard"
 # overrides:
-#bacula_fd_fileSet_includes: |+
+#bacula_fd_fileset_includes: |+
 #    File = "/etc"
 #    File = "/home"
 #    File = "/root"
 #    File = "/var/log"
-#bacula_fd_fileSet_excludes: |+
+#bacula_fd_fileset_excludes: |+
 #    File = "/proc"
 
 # protect existing filesets?
-bacula_fd_fileSet_overwrite: True
-bacula_fd_fileSet_signature: "SHA1"
-bacula_fd_fileSet_compression: "GZIP"
-bacula_fd_fileSet_verify: "pins1"
+bacula_fd_fileset_overwrite: True
+bacula_fd_fileset_signature: "SHA1"
+bacula_fd_fileset_compression: "GZIP"
+bacula_fd_fileset_verify: "pins1"
 # stay on current filesystems (regardless of submounts?) yes (bacula-default) -> stay
-bacula_fd_fileSet_onefs: "yes"
+bacula_fd_fileset_onefs: "yes"
 bacula_fd_level: "Incremental"
 bacula_fd_messages: "Standard"
 # pool (on dir) our fd takes:

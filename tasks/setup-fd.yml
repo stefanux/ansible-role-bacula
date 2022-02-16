@@ -32,23 +32,23 @@
 
 - name: Setup FD | Check if Fileset Config exists on director
   stat:
-    path: "{{ bacula_dir_include_config_dir }}/fileset-{{ bacula_fd_fileSet_name }}.conf"
+    path: "{{ bacula_dir_include_config_dir }}/fileset-{{ bacula_fd_fileset_name }}.conf"
   delegate_to: "{{ bacula_dir_fqdn }}"
-  register: bacula_fd_fileSet_exists
+  register: bacula_fd_fileset_exists
 
 - name: Setup FD | Register Fileset Config for FD on director
   template:
     src: "{{ role_path }}/templates/bacula-dir-fileset.conf.j2"
-    dest: "{{ bacula_dir_include_config_dir }}/fileset-{{ bacula_fd_fileSet_name }}.conf"
+    dest: "{{ bacula_dir_include_config_dir }}/fileset-{{ bacula_fd_fileset_name }}.conf"
     owner: "{{ bacula_dir_user }}"
     group: "{{ bacula_dir_group }}"
     mode: "{{ bacula_dir_filemode }}"
   notify: 'Reload bacula-dir'
   delegate_to: "{{ bacula_dir_fqdn }}"
   when:
-  - bacula_fd_fileSet_includes is defined
-  - bacula_fd_fileSet_includes|length > 0
-  - not bacula_fd_fileSet_exists.stat.exists|bool or (bacula_fd_fileSet_exists.stat.exists|bool and bacula_fd_fileSet_overwrite|bool)
+  - bacula_fd_fileset_includes is defined
+  - bacula_fd_fileset_includes|length > 0
+  - not bacula_fd_fileset_exists.stat.exists|bool or (bacula_fd_fileset_exists.stat.exists|bool and bacula_fd_fileset_overwrite|bool)
 
 - name: Setup FD | Manage configuration of bacula-fd file
   template:
