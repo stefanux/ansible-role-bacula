@@ -1,3 +1,5 @@
+moved to https://github.com/selfhostx/ansible/tree/main/roles/bacula
+
 # ansible-role-bacula
 
 This Role can install any component of the backup system "bacula".
